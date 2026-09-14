@@ -1,31 +1,48 @@
 Course matte = new Course("Matematik", 2);
 Course fysik = new Course("Fysik", 5);
 
-Student alice = new Student("Alice");
-Student bob = new Student("Bob");
-Student carl = new Student("Carl");
+Student Hadi = new Student("Hadi");
+Student Emilia = new Student("Emilia");
+Student Enes = new Student("Enes");
 
-matte.Enroll(alice);
-bob.Join(matte);
-fysik.Enroll(alice);
-carl.Join(fysik);
+matte.Enroll(Hadi);
+Emilia.Join(matte);
+fysik.Enroll(Hadi);
+Enes.Join(fysik);
 
-matte.Enroll(alice);
+// Testa dubblettskydd
+matte.Enroll(Hadi);
 
-matte.Enroll(carl);
+// Testa kapacitet (matte har bara 2 platser, redan full nu)
+matte.Enroll(Enes);
 
+Console.WriteLine("Innan borttagning:");
 matte.RollCall();
-alice.Schedule();
+fysik.RollCall();
+
+Console.WriteLine();
+Hadi.Schedule();
+Emilia.Schedule();
+Enes.Schedule();
 
 Console.WriteLine();
 
-alice.Leave(matte);
-fysik.Remove(carl);
+// Testa borttagning
+Hadi.Leave(matte);
+fysik.Remove(Enes);
 
-bob.Leave(fysik);
+// Testa att ta bort någon som inte är med (ska inte krascha)
+Emilia.Leave(fysik);
 
 Console.WriteLine("Efter borttagning:");
 matte.RollCall();
-alice.Schedule();
+fysik.RollCall();
+
+Console.WriteLine();
+Hadi.Schedule();
+Emilia.Schedule();
+Enes.Schedule();
+
+Console.WriteLine();
 Console.WriteLine(matte);
 Console.WriteLine(fysik);
